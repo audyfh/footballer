@@ -15,8 +15,7 @@ class FootballRemoteImpl implements FootballRemote {
   Future<List<MatchesModel>> getTodayMatches() async {
     try {
       final res = await dio.get(
-        'https://api.football-data.org/v4/competitions/PL/matches',
-        queryParameters: {'season': '2023'},
+        'https://api.football-data.org/v4/matches'
       );
       final matches = res.data['matches'] as List<dynamic>;
       return matches.map((item) => MatchesModel.fromJson(item)).toList();

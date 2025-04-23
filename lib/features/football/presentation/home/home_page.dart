@@ -4,6 +4,7 @@ import 'package:footballer/core/common/widgets/loader.dart';
 import 'package:footballer/core/utils/show_snackbar.dart';
 import 'package:footballer/features/football/domain/entities/match_entity.dart';
 import 'package:footballer/features/football/presentation/home/bloc/home_bloc.dart';
+import 'package:footballer/features/football/presentation/home/widgets/match_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,10 +33,8 @@ class _HomePageState extends State<HomePage> {
         listener: (context, state) {
           if (state is HomeError) {
             showSnackbar(context, state.message);
-           
           } else if (state is HomeSuccess) {
             matches.addAll(state.matches);
-           
           }
         },
         builder: (context, state) {
@@ -43,22 +42,18 @@ class _HomePageState extends State<HomePage> {
             return const Loader();
           }
           return Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Text("Ini Home page"),
+                Text("Today Match"),
                 Expanded(
-                  child: ListView.builder(itemBuilder: (context, index) {
-                    final match = matches[index];
-                    return Card(
-                      child: ListTile(
-                        title: Text(
-                            '${match.homeTeam?.name} vs ${match.awayTeam?.name}'),
-                        subtitle: Text('Tanggal: ${match.utcDate}'),
-                        trailing: Text(match.status ?? ''),
-                      ),
-                    );
-                  },itemCount: matches.length,),
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      final match = matches[index];
+                      return MatchCard(match: match);
+                    },
+                    itemCount: matches.length,
+                  ),
                 )
               ],
             ),
