@@ -6,10 +6,15 @@ import 'package:footballer/features/football/domain/repositories/footballrepo.da
 import 'package:footballer/features/football/domain/usecases/get_todaymatches_usecase.dart';
 import 'package:footballer/features/football/presentation/home/bloc/home_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
+
+  final supabase = await Supabase.initialize(url: Secret.supabaseUrl, anonKey: Secret.supabaseKey);
+  sl.registerLazySingleton(() => supabase.client);
+  
   sl.registerLazySingleton<Dio>(() {
     final dio = Dio();
     dio.options.headers['X-Auth-Token'] = Secret.fooballApiKey;

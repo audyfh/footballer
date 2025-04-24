@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Text("Today Match"),
+                Text("Today Match", style:  Theme.of(context).textTheme.headlineMedium),
                 Expanded(
                   child: ListView.builder(
                     itemBuilder: (context, index) {

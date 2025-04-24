@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:footballer/core/theme/text_theme.dart';
 import 'package:footballer/di/injection.dart';
+import 'package:footballer/features/auth/presentation/login_screen.dart';
+import 'package:footballer/features/auth/presentation/register_screen.dart';
 import 'package:footballer/features/football/presentation/home/bloc/home_bloc.dart';
 import 'package:footballer/features/football/presentation/home/home_page.dart';
 
@@ -27,9 +30,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+          textTheme: poppinsTextTheme, primaryTextTheme: poppinsTextTheme),
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: RegisterScreen(),
     );
   }
 }
